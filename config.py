@@ -9,9 +9,9 @@ ADMIN_IDS = [6967281416, 1652070303]
 PENDING_CHANNEL_ID = -1002366982201
 REQUIRED_CHANNEL = "@DraxtheDestroyer_Channel"
 
-AGENT_USERNAME = "drax350@agent.nsp"
-AGENT_PASSWORD = "Abcd@#123"
-PARENT_ID = "2650007-drax350@agent.nsp"
+AGENT_USERNAME = os.getenv("ICHANCY_AGENT_USERNAME", "")
+AGENT_PASSWORD = os.getenv("ICHANCY_AGENT_PASSWORD", "")
+PARENT_ID = os.getenv("ICHANCY_PARENT_ID", "")
 
 ICHANCY_BASE_URL = "https://agents.ichancy.com/global/api"
 

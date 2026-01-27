@@ -79,7 +79,7 @@ async def create_account_password(update: Update, context: ContextTypes.DEFAULT_
     await update.message.reply_text("⏳ جاري إنشاء الحساب...")
     
     api = get_api()
-    success, message, player_id = api.register_player(username, password)
+    success, message, player_id = await api.register_player(username, password)
     
     if success:
         await update_user(
