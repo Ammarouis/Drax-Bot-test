@@ -19,14 +19,17 @@ class IChancyAPI:
     async def login(self):
         try:
             client = await self._get_client()
-            login_url = f"{ICHANCY_BASE_URL}/User/signIn"
+            login_url = f"{ICHANCY_BASE_URL}/User/signInRequest"
             payload = {
                 "login": AGENT_USERNAME,
                 "password": AGENT_PASSWORD
             }
             headers = {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "*/*",
+                "Origin": "https://agents.ichancy.com",
+                "Referer": "https://agents.ichancy.com/",
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36"
             }
             logger.info(f"Attempting login with username: {AGENT_USERNAME}")
             response = await client.post(login_url, json=payload, headers=headers)
