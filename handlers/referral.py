@@ -2,15 +2,13 @@ from telegram import Update
 from telegram.ext import ContextTypes, ConversationHandler
 from database.db import get_user, get_referral_stats, get_setting
 from utils.keyboards import main_menu_keyboard
-from handlers.common import check_subscription, check_bot_active
+from handlers.common import require_subscription, require_bot_active
 
 async def referral_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not await check_subscription(update, context):
-        await update.message.reply_text("⚠️ يجب الاشتراك في القناة أولاً")
+    if not await require_subscription(update, context):
         return ConversationHandler.END
     
-    if not await check_bot_active(update, context):
-        await update.message.reply_text("⚠️ البوت متوقف حالياً")
+    if not await require_bot_active(update, context):
         return ConversationHandler.END
     
     user_id = update.effective_user.id

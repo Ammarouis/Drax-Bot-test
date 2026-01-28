@@ -8,7 +8,7 @@ from telegram.ext import (
 from config import BOT_TOKEN, STATES
 from database.db import init_db
 
-from handlers.common import start_command, go_back
+from handlers.common import start_command, go_back, verify_subscription
 from handlers.ichancy import (
     ichancy_menu, create_account_start, create_account_username, create_account_password,
     deposit_to_ichancy_start, deposit_to_ichancy_amount, withdraw_from_ichancy_start,
@@ -219,6 +219,7 @@ def main():
     )
     
     application.add_handler(CommandHandler("start", start_command))
+    application.add_handler(MessageHandler(filters.Regex("^✅ تحقق من الاشتراك$"), verify_subscription))
     application.add_handler(ichancy_handler)
     application.add_handler(wallet_handler)
     application.add_handler(gift_code_handler)

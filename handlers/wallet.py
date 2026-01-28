@@ -3,15 +3,13 @@ from telegram.ext import ContextTypes, ConversationHandler
 from config import STATES, PENDING_CHANNEL_ID
 from database.db import get_user, get_setting, create_pending_request, add_transaction, update_wallet, update_pending_request
 from utils.keyboards import wallet_menu_keyboard, deposit_method_keyboard, withdraw_method_keyboard, cancel_keyboard, main_menu_keyboard, approval_inline_keyboard, confirm_keyboard
-from handlers.common import check_subscription, check_bot_active
+from handlers.common import require_subscription, require_bot_active
 
 async def wallet_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not await check_subscription(update, context):
-        await update.message.reply_text("⚠️ يجب الاشتراك في القناة أولاً")
+    if not await require_subscription(update, context):
         return ConversationHandler.END
     
-    if not await check_bot_active(update, context):
-        await update.message.reply_text("⚠️ البوت متوقف حالياً")
+    if not await require_bot_active(update, context):
         return ConversationHandler.END
     
     user = await get_user(update.effective_user.id)

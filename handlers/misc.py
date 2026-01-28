@@ -2,11 +2,13 @@ from telegram import Update
 from telegram.ext import ContextTypes, ConversationHandler
 from database.db import get_user, get_transactions, get_setting, cancel_pending_requests
 from utils.keyboards import main_menu_keyboard
-from handlers.common import check_subscription, check_bot_active
+from handlers.common import require_subscription, require_bot_active
 
 async def show_history(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not await check_subscription(update, context):
-        await update.message.reply_text("⚠️ يجب الاشتراك في القناة أولاً")
+    if not await require_subscription(update, context):
+        return ConversationHandler.END
+    
+    if not await require_bot_active(update, context):
         return ConversationHandler.END
     
     transactions = await get_transactions(update.effective_user.id, 5)
@@ -70,8 +72,10 @@ async def show_terms(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return ConversationHandler.END
 
 async def show_bonus_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not await check_subscription(update, context):
-        await update.message.reply_text("⚠️ يجب الاشتراك في القناة أولاً")
+    if not await require_subscription(update, context):
+        return ConversationHandler.END
+    
+    if not await require_bot_active(update, context):
         return ConversationHandler.END
     
     bonus = await get_setting("deposit_bonus")
@@ -104,8 +108,10 @@ async def show_support(update: Update, context: ContextTypes.DEFAULT_TYPE):
     return ConversationHandler.END
 
 async def cancel_pending(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not await check_subscription(update, context):
-        await update.message.reply_text("⚠️ يجب الاشتراك في القناة أولاً")
+    if not await require_subscription(update, context):
+        return ConversationHandler.END
+    
+    if not await require_bot_active(update, context):
         return ConversationHandler.END
     
     await cancel_pending_requests(update.effective_user.id)

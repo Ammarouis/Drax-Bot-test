@@ -4,15 +4,13 @@ from config import STATES, PENDING_CHANNEL_ID
 from database.db import get_user, update_user, update_wallet, create_pending_request, add_transaction
 from utils.keyboards import ichancy_menu_keyboard, main_menu_keyboard, back_keyboard, cancel_keyboard, approval_inline_keyboard
 from utils.ichancy_api import get_api
-from handlers.common import check_subscription, check_bot_active
+from handlers.common import require_subscription, require_bot_active
 
 async def ichancy_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    if not await check_subscription(update, context):
-        await update.message.reply_text("⚠️ يجب الاشتراك في القناة أولاً")
+    if not await require_subscription(update, context):
         return ConversationHandler.END
     
-    if not await check_bot_active(update, context):
-        await update.message.reply_text("⚠️ البوت متوقف حالياً")
+    if not await require_bot_active(update, context):
         return ConversationHandler.END
     
     await update.message.reply_text(
