@@ -301,7 +301,10 @@ async def update_transaction_status(telegram_id: int, transaction_type: str, new
         await db.execute('''
             UPDATE transactions 
             SET status = ? 
-            WHERE telegram_id = ? AND type = ? AND status = 'pending'
-            ORDER BY created_at DESC LIMIT 1
+            WHERE id = (
+                SELECT id FROM transactions 
+                WHERE telegram_id = ? AND type = ? AND status = 'pending'
+                ORDER BY created_at DESC LIMIT 1
+            )
         ''', (new_status, telegram_id, transaction_type))
         await db.commit()
