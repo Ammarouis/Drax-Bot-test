@@ -50,10 +50,14 @@ class IChancyAPI:
             client = await self._get_client()
             url = f"{ICHANCY_BASE_URL}/Agent/getChildren"
             response = await client.post(url, json={})
+            logger.info(f"Get children response status: {response.status_code}")
             if response.status_code == 200:
-                return True, response.json()
+                result = response.json()
+                logger.info(f"Get children response: {result}")
+                return True, result
             return False, "فشل في جلب البيانات"
         except Exception as e:
+            logger.exception(f"Get children exception: {e}")
             return False, str(e)
     
     async def register_player(self, username: str, password: str):
