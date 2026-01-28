@@ -74,14 +74,24 @@ class IChancyAPI:
                 result = response.json()
                 logger.info(f"Register response: {result}")
                 
-                if result.get("success") or result.get("result"):
+                result_value = result.get("result")
+                
+                if result_value == "ex":
+                    return False, "اسم المستخدم موجود مسبقاً، يرجى اختيار اسم آخر", None
+                
+                if result.get("status") and result_value and result_value != "ex":
+                    if isinstance(result_value, dict):
+                        player_id = result_value.get("playerId") or result_value.get("id")
+                        if player_id:
+                            return True, "تم إنشاء الحساب بنجاح", player_id
+                    
                     player_id = await self.get_player_id(username)
                     logger.info(f"Player ID found: {player_id}")
                     if player_id:
                         return True, "تم إنشاء الحساب بنجاح", player_id
                     return True, "تم إنشاء الحساب ولكن لم يتم العثور على معرف اللاعب", None
                 
-                error_msg = result.get("message") or result.get("error") or str(result)
+                error_msg = result.get("message") or result.get("error") or "فشل إنشاء الحساب"
                 logger.error(f"Register failed: {error_msg}")
                 return False, error_msg, None
             return False, f"خطأ: {response.status_code}", None
@@ -95,7 +105,7 @@ class IChancyAPI:
             url = f"{ICHANCY_BASE_URL}/Statistics/getPlayersStatisticsPro"
             payload = {
                 "start": 0,
-                "limit": 10,
+                "limit": 100,
                 "filter": {},
                 "searchBy": {"players": username}
             }
@@ -104,7 +114,14 @@ class IChancyAPI:
             if response.status_code == 200:
                 result = response.json()
                 logger.info(f"Get player ID response: {result}")
-                records = result.get("result", {}).get("records", [])
+                
+                result_value = result.get("result")
+                
+                if result_value == "ex" or not isinstance(result_value, dict):
+                    logger.warning(f"Unexpected result format: {result_value}")
+                    return None
+                
+                records = result_value.get("records", [])
                 if records:
                     player_id = records[0].get("playerId")
                     logger.info(f"Found player ID: {player_id}")
