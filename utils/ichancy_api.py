@@ -1,6 +1,9 @@
 import httpx
 import asyncio
+import logging
 from config import AGENT_USERNAME, AGENT_PASSWORD, PARENT_ID, ICHANCY_BASE_URL
+
+logger = logging.getLogger(__name__)
 
 class IChancyAPI:
     def __init__(self):
@@ -49,6 +52,7 @@ class IChancyAPI:
             if not self.logged_in:
                 success, msg = await self.login()
                 if not success:
+                    logger.error(f"Login failed: {msg}")
                     return False, msg, None
             
             await self.get_children()
@@ -62,17 +66,27 @@ class IChancyAPI:
                 "parentId": PARENT_ID
             }
             
+            logger.info(f"Registering player: {username}")
             response = await client.post(register_url, json=payload)
+            logger.info(f"Register response status: {response.status_code}")
+            
             if response.status_code == 200:
                 result = response.json()
+                logger.info(f"Register response: {result}")
+                
                 if result.get("success") or result.get("result"):
                     player_id = await self.get_player_id(username)
+                    logger.info(f"Player ID found: {player_id}")
                     if player_id:
                         return True, "تم إنشاء الحساب بنجاح", player_id
                     return True, "تم إنشاء الحساب ولكن لم يتم العثور على معرف اللاعب", None
-                return False, result.get("message", "فشل إنشاء الحساب"), None
+                
+                error_msg = result.get("message") or result.get("error") or str(result)
+                logger.error(f"Register failed: {error_msg}")
+                return False, error_msg, None
             return False, f"خطأ: {response.status_code}", None
         except Exception as e:
+            logger.exception(f"Register exception: {e}")
             return False, f"خطأ: {str(e)}", None
     
     async def get_player_id(self, username: str):
@@ -86,13 +100,19 @@ class IChancyAPI:
                 "searchBy": {"players": username}
             }
             response = await client.post(url, json=payload)
+            logger.info(f"Get player ID response status: {response.status_code}")
             if response.status_code == 200:
                 result = response.json()
+                logger.info(f"Get player ID response: {result}")
                 records = result.get("result", {}).get("records", [])
                 if records:
-                    return records[0].get("playerId")
+                    player_id = records[0].get("playerId")
+                    logger.info(f"Found player ID: {player_id}")
+                    return player_id
+                logger.warning(f"No records found for username: {username}")
             return None
-        except:
+        except Exception as e:
+            logger.exception(f"Get player ID exception: {e}")
             return None
     
     async def deposit_to_player(self, player_id: str, amount: float):

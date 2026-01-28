@@ -2,8 +2,11 @@ from telegram import ReplyKeyboardMarkup, InlineKeyboardMarkup, InlineKeyboardBu
 
 def main_menu_keyboard():
     keyboard = [
-        ["🎮 إدارة حساب iChancy", "💰 إدارة محفظة البوت", "👥 نظام الإحالة", "📞 التواصل والدعم", "🎁 تفعيل كود هدية"],
-        ["⏸️ إيقاف العمليات المعلقة", "🎈 إهداء نقاط", "📜 السجل", "📋 الشروط والأحكام", "💎 معلومات البونص الحالي"]
+        ["🎮 إدارة حساب iChancy", "💰 إدارة محفظة البوت"],
+        ["👥 نظام الإحالة", "📞 التواصل والدعم"],
+        ["🎁 تفعيل كود هدية", "🎈 إهداء نقاط"],
+        ["📜 السجل", "💎 معلومات البونص الحالي"],
+        ["⏸️ إيقاف العمليات المعلقة", "📋 الشروط والأحكام"]
     ]
     return ReplyKeyboardMarkup(keyboard, resize_keyboard=True)
 
