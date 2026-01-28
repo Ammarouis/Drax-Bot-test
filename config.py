@@ -12,6 +12,7 @@ REQUIRED_CHANNEL = "@DraxtheDestroyer_Channel"
 AGENT_USERNAME = os.getenv("ICHANCY_AGENT_USERNAME", "")
 AGENT_PASSWORD = os.getenv("ICHANCY_AGENT_PASSWORD", "")
 PARENT_ID = os.getenv("ICHANCY_PARENT_ID", "")
+CF_CLEARANCE = os.getenv("ICHANCY_CF_CLEARANCE", "")
 
 ICHANCY_BASE_URL = "https://agents.ichancy.com/global/api"
 

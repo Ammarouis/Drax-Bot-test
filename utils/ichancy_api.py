@@ -1,7 +1,7 @@
 import httpx
 import asyncio
 import logging
-from config import AGENT_USERNAME, AGENT_PASSWORD, PARENT_ID, ICHANCY_BASE_URL
+from config import AGENT_USERNAME, AGENT_PASSWORD, PARENT_ID, ICHANCY_BASE_URL, CF_CLEARANCE
 
 logger = logging.getLogger(__name__)
 
@@ -9,11 +9,13 @@ class IChancyAPI:
     def __init__(self):
         self.client = None
         self.logged_in = False
-        self.cookies = httpx.Cookies()
     
     async def _get_client(self):
         if self.client is None:
-            self.client = httpx.AsyncClient(timeout=30.0)
+            cookies = {}
+            if CF_CLEARANCE:
+                cookies["cf_clearance"] = CF_CLEARANCE
+            self.client = httpx.AsyncClient(timeout=30.0, cookies=cookies)
         return self.client
     
     async def login(self):
