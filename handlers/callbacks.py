@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import ContextTypes
 from config import ADMIN_IDS
-from database.db import get_pending_request, update_pending_request, update_wallet, get_user, add_transaction
+from database.db import get_pending_request, update_pending_request, update_wallet, get_user, add_transaction, update_transaction_status
 from utils.ichancy_api import get_api
 from handlers.common import is_admin
 
@@ -32,6 +32,7 @@ async def approval_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     if action == "approve":
         await update_pending_request(request_id, status='approved')
+        await update_transaction_status(user_id, request_type, 'completed')
         
         if request_type == 'wallet_deposit':
             user = await get_user(user_id)
@@ -142,6 +143,7 @@ async def approval_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     elif action == "reject":
         await update_pending_request(request_id, status='rejected')
+        await update_transaction_status(user_id, request_type, 'rejected')
         
         if request_type in ['wallet_withdraw', 'ichancy_deposit']:
             await update_wallet(user_id, amount)

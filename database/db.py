@@ -295,3 +295,13 @@ async def get_total_commission():
         async with db.execute('SELECT SUM(amount) FROM commissions') as cursor:
             total = (await cursor.fetchone())[0] or 0
         return total
+
+async def update_transaction_status(telegram_id: int, transaction_type: str, new_status: str):
+    async with aiosqlite.connect(DATABASE_PATH) as db:
+        await db.execute('''
+            UPDATE transactions 
+            SET status = ? 
+            WHERE telegram_id = ? AND type = ? AND status = 'pending'
+            ORDER BY created_at DESC LIMIT 1
+        ''', (new_status, telegram_id, transaction_type))
+        await db.commit()
