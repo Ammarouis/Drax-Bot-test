@@ -1,0 +1,56 @@
+Request URL
+https://agents.ichancy.com/global/api/Player/registerPlayer
+Referrer Policy
+strict-origin-when-cross-origin
+:authority
+agents.ichancy.com
+:method
+POST
+:path
+/global/api/Player/registerPlayer
+:scheme
+https
+accept
+*/*
+accept-encoding
+gzip, deflate, br, zstd
+accept-language
+en-US,en;q=0.9,ar-EG;q=0.8,ar-MA;q=0.7,ar;q=0.6
+content-length
+146
+content-type
+application/json
+cookie
+_ga=GA1.1.1847981073.1768556803; _hjSessionUser_6458686=eyJpZCI6IjRlZTdiNjE3LTdjZjgtNWFlNi1iOWNhLTM4MTdjNmM4NDhlMCIsImNyZWF0ZWQiOjE3Njg1NTY4MTE0MDIsImV4aXN0aW5nIjp0cnVlfQ==; _ga_NYRZ35ZKZ0=GS2.1.s1768556802$o1$g1$t1768557180$j60$l0$h0; _ga_QBKS83LZ2E=GS2.1.s1768556809$o1$g1$t1768557651$j60$l0$h0; languageCode=ar_IQ; cf_clearance=pfsM18Fs6mGvH2WKm7p3nYuQ6cZhHE6pvp9eq86gYRI-1769560216-1.2.1.1-p3PAVrv3uhheEd13kHJCQvkXgJQ_KVgSuCeSzKRLMAwjHZpWilOEhPXevilZ7N7UnYyD18mdnpykmI.PDxJHgfTCzj9hW1KjDOeTvjrJ6sK1o8QqeCHu6GAo53kEk0UDFh7lWa5ps_G04Rtnqclyb8d6vpX4MAY7nf9OzxYcokTL8MVtfpk2_8jiAW.DSXy3KKmhY1P6L3Dfi_nB0RpanSjveLOlcolYkGDd6XmcPOo; PHPSESSID_3a07edcde6f57a008f3251235df79776a424dd7623e40d4250e37e4f1f15fadf=a194df6ccd5318d5c21bcf0c68166bf9; __cf_bm=SY3pxOpfhFhKW2PF2JsZiI5HO0k1jv6pqB570SYt3E4-1769560230-1.0.1.1-t4hgjA8amsfgEaSIX53IyDLq3NEjSGt2.Uf2wc9mdp2r6DiXmanYZXIkDmcZRHamkWApwcjadpg_NuBIqJaP_3OGWEUMdO38Lk5T2QZgBt4
+origin
+https://agents.ichancy.com
+priority
+u=1, i
+referer
+https://agents.ichancy.com/dashboard
+sec-ch-ua
+"Google Chrome";v="143", "Chromium";v="143", "Not A(Brand";v="24"
+sec-ch-ua-arch
+"x86"
+sec-ch-ua-bitness
+"64"
+sec-ch-ua-full-version
+"143.0.7499.193"
+sec-ch-ua-full-version-list
+"Google Chrome";v="143.0.7499.193", "Chromium";v="143.0.7499.193", "Not A(Brand";v="24.0.0.0"
+sec-ch-ua-mobile
+?0
+sec-ch-ua-model
+""
+sec-ch-ua-platform
+"Windows"
+sec-ch-ua-platform-version
+"19.0.0"
+sec-fetch-dest
+empty
+sec-fetch-mode
+cors
+sec-fetch-site
+same-origin
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36
