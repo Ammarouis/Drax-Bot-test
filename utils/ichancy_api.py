@@ -24,16 +24,25 @@ class IChancyAPI:
                 "login": AGENT_USERNAME,
                 "password": AGENT_PASSWORD
             }
+            logger.info(f"Attempting login with username: {AGENT_USERNAME}")
             response = await client.post(login_url, json=payload)
+            logger.info(f"Login response status: {response.status_code}")
             if response.status_code == 200:
                 result = response.json()
-                if result.get("success") or result.get("result"):
+                logger.info(f"Login response: {result}")
+                
+                if result.get("status") == True or result.get("success") or (result.get("result") and result.get("result") != "ex"):
                     self.logged_in = True
                     self.cookies = dict(response.cookies)
+                    logger.info("Login successful")
                     return True, "تم تسجيل الدخول بنجاح"
-                return False, result.get("message", "فشل تسجيل الدخول")
+                
+                error_msg = result.get("message") or result.get("error") or f"فشل تسجيل الدخول: {result}"
+                logger.error(f"Login failed: {error_msg}")
+                return False, error_msg
             return False, f"خطأ في الاتصال: {response.status_code}"
         except Exception as e:
+            logger.exception(f"Login exception: {e}")
             return False, f"خطأ: {str(e)}"
     
     async def get_children(self):
