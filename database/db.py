@@ -218,13 +218,20 @@ async def get_gift_code(code: str):
 
 async def use_gift_code(code: str, telegram_id: int):
     async with aiosqlite.connect(DATABASE_PATH) as db:
+        db.row_factory = aiosqlite.Row
+        
         existing = await db.execute('''
             SELECT * FROM gift_code_uses WHERE code = ? AND telegram_id = ?
         ''', (code, telegram_id))
         if await existing.fetchone():
             return False, "already_used"
         
-        gift_code = await get_gift_code(code)
+        async with db.execute(
+            'SELECT * FROM gift_codes WHERE code = ?', (code,)
+        ) as cursor:
+            row = await cursor.fetchone()
+            gift_code = dict(row) if row else None
+        
         if not gift_code:
             return False, "not_found"
         if gift_code['current_uses'] >= gift_code['max_uses']:
@@ -236,7 +243,9 @@ async def use_gift_code(code: str, telegram_id: int):
         await db.execute('''
             INSERT INTO gift_code_uses (code, telegram_id) VALUES (?, ?)
         ''', (code, telegram_id))
-        await update_wallet(telegram_id, gift_code['points'])
+        await db.execute('''
+            UPDATE users SET wallet_balance = wallet_balance + ? WHERE telegram_id = ?
+        ''', (gift_code['points'], telegram_id))
         await db.commit()
         return True, gift_code['points']
 
