@@ -60,3 +60,8 @@ Uses SQLite with the following tables:
 - Wallet system with multiple payment methods
 - Referral system with automatic commission
 - Admin panel with comprehensive controls
+- **Mandatory channel subscription**: Users must subscribe to the channel before using any feature
+- **Settings persistence**: All settings (payment codes, commission rates) are stored in SQLite and persist after restart
+- **Bot "off" mode**: When admin toggles bot off, users see "البوت غير متوفر" message instead of bot stopping
+- **Payment/withdrawal confirmation**: Admin approval via inline buttons in pending channel
+- Added Cloudflare cf_clearance cookie support for iChancy API
