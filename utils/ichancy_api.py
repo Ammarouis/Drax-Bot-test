@@ -9,11 +9,11 @@ class IChancyAPI:
     def __init__(self):
         self.client = None
         self.logged_in = False
-        self.cookies = {}
+        self.cookies = httpx.Cookies()
     
     async def _get_client(self):
         if self.client is None:
-            self.client = httpx.AsyncClient(timeout=30.0, cookies=self.cookies)
+            self.client = httpx.AsyncClient(timeout=30.0)
         return self.client
     
     async def login(self):
@@ -36,9 +36,9 @@ class IChancyAPI:
                 result = response.json()
                 logger.info(f"Login response: {result}")
                 
-                self.cookies = dict(response.cookies)
-                if self.cookies:
-                    self.client = httpx.AsyncClient(timeout=30.0, cookies=self.cookies)
+                for name, value in response.cookies.items():
+                    client.cookies.set(name, value)
+                logger.info(f"Client cookies after login: {dict(client.cookies)}")
                 
                 if result.get("status") == True:
                     self.logged_in = True
