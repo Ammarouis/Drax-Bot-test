@@ -39,6 +39,7 @@ class IChancyAPI:
                 result = response.json()
                 logger.info(f"Login response: {result}")
                 
+                client.cookies.clear()
                 for name, value in response.cookies.items():
                     client.cookies.set(name, value)
                 logger.info(f"Client cookies after login: {dict(client.cookies)}")
