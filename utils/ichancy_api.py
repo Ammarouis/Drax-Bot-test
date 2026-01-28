@@ -24,16 +24,24 @@ class IChancyAPI:
                 "login": AGENT_USERNAME,
                 "password": AGENT_PASSWORD
             }
+            headers = {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            }
             logger.info(f"Attempting login with username: {AGENT_USERNAME}")
-            response = await client.post(login_url, json=payload)
+            response = await client.post(login_url, json=payload, headers=headers)
             logger.info(f"Login response status: {response.status_code}")
+            logger.info(f"Login response cookies: {dict(response.cookies)}")
             if response.status_code == 200:
                 result = response.json()
                 logger.info(f"Login response: {result}")
                 
-                if result.get("status") == True or result.get("success") or (result.get("result") and result.get("result") != "ex"):
+                self.cookies = dict(response.cookies)
+                if self.cookies:
+                    self.client = httpx.AsyncClient(timeout=30.0, cookies=self.cookies)
+                
+                if result.get("status") == True:
                     self.logged_in = True
-                    self.cookies = dict(response.cookies)
                     logger.info("Login successful")
                     return True, "تم تسجيل الدخول بنجاح"
                 
