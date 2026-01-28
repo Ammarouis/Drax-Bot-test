@@ -1,7 +1,7 @@
 from telegram import Update
 from telegram.ext import ContextTypes, ConversationHandler
 from config import STATES
-from database.db import get_user, use_gift_code, get_setting, update_wallet, add_transaction
+from database.db import get_user, use_gift_code, get_setting, update_wallet, add_transaction, add_commission
 from utils.keyboards import main_menu_keyboard, cancel_keyboard
 from handlers.common import require_subscription, require_bot_active
 
@@ -166,6 +166,8 @@ async def gift_points_amount(update: Update, context: ContextTypes.DEFAULT_TYPE)
     
     await update_wallet(update.effective_user.id, -total_deduct)
     await update_wallet(target_id, amount)
+    
+    await add_commission("gift", commission_amount, update.effective_user.id)
     
     await add_transaction(
         update.effective_user.id,

@@ -3,7 +3,8 @@ from telegram.ext import ContextTypes, ConversationHandler
 from config import STATES, ADMIN_IDS
 from database.db import (
     get_user, get_setting, update_setting, get_user_stats, 
-    get_all_users, set_wallet, create_gift_code, update_wallet
+    get_all_users, set_wallet, create_gift_code, update_wallet,
+    get_total_commission
 )
 from utils.keyboards import (
     admin_menu_keyboard, main_menu_keyboard, cancel_keyboard,
@@ -131,6 +132,15 @@ async def admin_menu_handler(update: Update, context: ContextTypes.DEFAULT_TYPE)
             reply_markup=cancel_keyboard()
         )
         return STATES["ADMIN_CREATE_GIFT_CODE"]
+    
+    elif text == "💵 العمولات المجمعة":
+        total = await get_total_commission()
+        await update.message.reply_text(
+            f"💵 العمولات المجمعة\n\n"
+            f"💰 إجمالي العمولات: {total:.2f} ل.س",
+            reply_markup=admin_menu_keyboard()
+        )
+        return STATES["ADMIN_MENU"]
     
     return STATES["ADMIN_MENU"]
 

@@ -75,6 +75,16 @@ async def init_db():
             )
         ''')
         
+        await db.execute('''
+            CREATE TABLE IF NOT EXISTS commissions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                type TEXT,
+                amount REAL,
+                source_user INTEGER,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            )
+        ''')
+        
         for key, value in DEFAULT_SETTINGS.items():
             await db.execute('''
                 INSERT OR IGNORE INTO settings (key, value) VALUES (?, ?)
@@ -271,3 +281,17 @@ async def get_user_stats():
         async with db.execute('SELECT SUM(wallet_balance) FROM users') as cursor:
             total_balance = (await cursor.fetchone())[0] or 0
         return {"total_users": total, "total_balance": total_balance}
+
+async def add_commission(commission_type: str, amount: float, source_user: int):
+    async with aiosqlite.connect(DATABASE_PATH) as db:
+        await db.execute('''
+            INSERT INTO commissions (type, amount, source_user)
+            VALUES (?, ?, ?)
+        ''', (commission_type, amount, source_user))
+        await db.commit()
+
+async def get_total_commission():
+    async with aiosqlite.connect(DATABASE_PATH) as db:
+        async with db.execute('SELECT SUM(amount) FROM commissions') as cursor:
+            total = (await cursor.fetchone())[0] or 0
+        return total
