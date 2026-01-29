@@ -18,7 +18,7 @@ from handlers.wallet import (
     wallet_menu, wallet_deposit_method, wallet_deposit_syriatel, wallet_deposit_shamcash_syp,
     wallet_deposit_shamcash_usd, wallet_deposit_amount, wallet_deposit_confirm,
     wallet_withdraw_method, wallet_withdraw_syriatel, wallet_withdraw_shamcash,
-    wallet_withdraw_amount, wallet_back
+    wallet_withdraw_amount, wallet_withdraw_info, wallet_back
 )
 from handlers.referral import referral_menu
 from handlers.gift import (
@@ -107,6 +107,9 @@ def main():
             ],
             STATES["WALLET_WITHDRAW_AMOUNT"]: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND, wallet_withdraw_amount),
+            ],
+            STATES["WALLET_WITHDRAW_INFO"]: [
+                MessageHandler(filters.TEXT & ~filters.COMMAND, wallet_withdraw_info),
             ],
         },
         fallbacks=[

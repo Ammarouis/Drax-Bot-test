@@ -281,6 +281,31 @@ async def wallet_withdraw_amount(update: Update, context: ContextTypes.DEFAULT_T
         )
         return STATES["WALLET_WITHDRAW_AMOUNT"]
     
+    context.user_data['withdraw_amount'] = amount
+    method = context.user_data.get('withdraw_method')
+    
+    if method == 'syriatel':
+        await update.message.reply_text(
+            "📱 أدخل رقم الهاتف للسحب عليه:",
+            reply_markup=cancel_keyboard()
+        )
+    else:
+        await update.message.reply_text(
+            "💵 أدخل كود الدفع للسحب عليه:",
+            reply_markup=cancel_keyboard()
+        )
+    
+    return STATES["WALLET_WITHDRAW_INFO"]
+
+async def wallet_withdraw_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    text = update.message.text
+    
+    if text == "❌ إلغاء":
+        await update.message.reply_text("تم الإلغاء", reply_markup=wallet_menu_keyboard())
+        return STATES["WALLET_MENU"]
+    
+    withdraw_info = text.strip()
+    amount = context.user_data.get('withdraw_amount')
     method = context.user_data.get('withdraw_method')
     method_names = {'syriatel': 'سيريتل كاش', 'shamcash': 'شام كاش'}
     
@@ -291,7 +316,7 @@ async def wallet_withdraw_amount(update: Update, context: ContextTypes.DEFAULT_T
         "wallet_withdraw",
         amount,
         "SYP",
-        method
+        f"{method}|{withdraw_info}"
     )
     
     await add_transaction(
@@ -302,10 +327,16 @@ async def wallet_withdraw_amount(update: Update, context: ContextTypes.DEFAULT_T
         f"سحب من المحفظة - {method_names.get(method, method)}"
     )
     
+    if method == 'syriatel':
+        info_label = "📱 رقم الهاتف"
+    else:
+        info_label = "💳 كود الدفع"
+    
     channel_message = (
         f"📤 طلب سحب من المحفظة\n\n"
         f"👤 المستخدم: <code>{update.effective_user.id}</code>\n"
         f"💳 الطريقة: {method_names.get(method, method)}\n"
+        f"{info_label}: <code>{withdraw_info}</code>\n"
         f"💰 المبلغ: {amount:.2f} ل.س\n"
         f"📋 رقم الطلب: <code>{request_id}</code>"
     )
