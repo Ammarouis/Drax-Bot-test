@@ -27,7 +27,7 @@ class IChancyAPI:
         try:
             client = await self._get_client()
             login_url = f"{ICHANCY_BASE_URL}/User/signIn"
-            payload = {"login": AGENT_USERNAME, "password": AGENT_PASSWORD}
+            payload = {"username": AGENT_USERNAME, "password": AGENT_PASSWORD}
             headers = {
                 "Content-Type":
                 "application/json",
