@@ -53,9 +53,10 @@ async def approval_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             
             await query.edit_message_text(
                 f"✅ تمت الموافقة\n\n"
-                f"👤 المستخدم: {user_id}\n"
+                f"👤 المستخدم: <code>{user_id}</code>\n"
                 f"💰 المبلغ: {amount:.2f} ل.س\n"
-                f"📋 رقم الطلب: {request_id}"
+                f"📋 رقم الطلب: <code>{request_id}</code>",
+                parse_mode="HTML"
             )
             
             try:
@@ -70,9 +71,10 @@ async def approval_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif request_type == 'wallet_withdraw':
             await query.edit_message_text(
                 f"✅ تمت الموافقة على السحب\n\n"
-                f"👤 المستخدم: {user_id}\n"
+                f"👤 المستخدم: <code>{user_id}</code>\n"
                 f"💰 المبلغ: {amount:.2f} ل.س\n"
-                f"📋 رقم الطلب: {request_id}"
+                f"📋 رقم الطلب: <code>{request_id}</code>",
+                parse_mode="HTML"
             )
             
             try:
@@ -93,9 +95,10 @@ async def approval_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             if success:
                 await query.edit_message_text(
                     f"✅ تمت الموافقة وتنفيذ الإيداع\n\n"
-                    f"👤 المستخدم: {user_id}\n"
-                    f"🎮 معرف اللاعب: {player_id}\n"
-                    f"💰 المبلغ: {amount:.2f} ل.س"
+                    f"👤 المستخدم: <code>{user_id}</code>\n"
+                    f"🎮 معرف اللاعب: <code>{player_id}</code>\n"
+                    f"💰 المبلغ: {amount:.2f} ل.س",
+                    parse_mode="HTML"
                 )
                 
                 try:
@@ -123,8 +126,9 @@ async def approval_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 await update_wallet(user_id, amount)
                 await query.edit_message_text(
                     f"✅ تم السحب من iChancy وإضافة الرصيد\n\n"
-                    f"👤 المستخدم: {user_id}\n"
-                    f"💰 المبلغ: {amount:.2f} ل.س"
+                    f"👤 المستخدم: <code>{user_id}</code>\n"
+                    f"💰 المبلغ: {amount:.2f} ل.س",
+                    parse_mode="HTML"
                 )
                 
                 try:
@@ -150,9 +154,10 @@ async def approval_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         
         await query.edit_message_text(
             f"❌ تم الرفض\n\n"
-            f"👤 المستخدم: {user_id}\n"
+            f"👤 المستخدم: <code>{user_id}</code>\n"
             f"💰 المبلغ: {amount:.2f} ل.س\n"
-            f"📋 رقم الطلب: {request_id}"
+            f"📋 رقم الطلب: <code>{request_id}</code>",
+            parse_mode="HTML"
         )
         
         try:

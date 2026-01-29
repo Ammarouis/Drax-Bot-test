@@ -167,16 +167,17 @@ async def deposit_to_ichancy_amount(update: Update, context: ContextTypes.DEFAUL
     
     channel_message = (
         f"📥 طلب شحن iChancy جديد\n\n"
-        f"👤 المستخدم: {update.effective_user.id}\n"
-        f"🎮 معرف اللاعب: {user['ichancy_player_id']}\n"
+        f"👤 المستخدم: <code>{update.effective_user.id}</code>\n"
+        f"🎮 معرف اللاعب: <code>{user['ichancy_player_id']}</code>\n"
         f"💰 المبلغ: {amount:.2f} ل.س\n"
-        f"📋 رقم الطلب: {request_id}"
+        f"📋 رقم الطلب: <code>{request_id}</code>"
     )
     
     await context.bot.send_message(
         PENDING_CHANNEL_ID,
         channel_message,
-        reply_markup=approval_inline_keyboard(request_id)
+        reply_markup=approval_inline_keyboard(request_id),
+        parse_mode="HTML"
     )
     
     await update.message.reply_text(
@@ -245,16 +246,17 @@ async def withdraw_from_ichancy_amount(update: Update, context: ContextTypes.DEF
     
     channel_message = (
         f"📤 طلب سحب من iChancy جديد\n\n"
-        f"👤 المستخدم: {update.effective_user.id}\n"
-        f"🎮 معرف اللاعب: {user['ichancy_player_id']}\n"
+        f"👤 المستخدم: <code>{update.effective_user.id}</code>\n"
+        f"🎮 معرف اللاعب: <code>{user['ichancy_player_id']}</code>\n"
         f"💰 المبلغ: {amount:.2f} ل.س\n"
-        f"📋 رقم الطلب: {request_id}"
+        f"📋 رقم الطلب: <code>{request_id}</code>"
     )
     
     await context.bot.send_message(
         PENDING_CHANNEL_ID,
         channel_message,
-        reply_markup=approval_inline_keyboard(request_id)
+        reply_markup=approval_inline_keyboard(request_id),
+        parse_mode="HTML"
     )
     
     await update.message.reply_text(

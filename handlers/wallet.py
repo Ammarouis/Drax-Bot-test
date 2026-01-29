@@ -187,17 +187,18 @@ async def wallet_deposit_confirm(update: Update, context: ContextTypes.DEFAULT_T
     
     channel_message = (
         f"📥 طلب شحن محفظة جديد\n\n"
-        f"👤 المستخدم: {update.effective_user.id}\n"
+        f"👤 المستخدم: <code>{update.effective_user.id}</code>\n"
         f"💳 الطريقة: {method_names.get(method, method)}\n"
         f"💰 المبلغ الأصلي: {amount} {currency}\n"
         f"💵 المبلغ النهائي: {final_amount:.2f} ل.س\n"
-        f"📋 رقم الطلب: {request_id}"
+        f"📋 رقم الطلب: <code>{request_id}</code>"
     )
     
     await context.bot.send_message(
         PENDING_CHANNEL_ID,
         channel_message,
-        reply_markup=approval_inline_keyboard(request_id)
+        reply_markup=approval_inline_keyboard(request_id),
+        parse_mode="HTML"
     )
     
     await update.message.reply_text(
@@ -303,16 +304,17 @@ async def wallet_withdraw_amount(update: Update, context: ContextTypes.DEFAULT_T
     
     channel_message = (
         f"📤 طلب سحب من المحفظة\n\n"
-        f"👤 المستخدم: {update.effective_user.id}\n"
+        f"👤 المستخدم: <code>{update.effective_user.id}</code>\n"
         f"💳 الطريقة: {method_names.get(method, method)}\n"
         f"💰 المبلغ: {amount:.2f} ل.س\n"
-        f"📋 رقم الطلب: {request_id}"
+        f"📋 رقم الطلب: <code>{request_id}</code>"
     )
     
     await context.bot.send_message(
         PENDING_CHANNEL_ID,
         channel_message,
-        reply_markup=approval_inline_keyboard(request_id)
+        reply_markup=approval_inline_keyboard(request_id),
+        parse_mode="HTML"
     )
     
     await update.message.reply_text(
