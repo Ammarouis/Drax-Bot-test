@@ -107,10 +107,7 @@ class IChancyAPI:
                 
                 result_value = result.get("result")
                 
-                if result_value == "ex":
-                    return False, "اسم المستخدم موجود مسبقاً، يرجى اختيار اسم آخر", None
-                
-                if result.get("status") and result_value and result_value != "ex":
+                if result.get("status") == True:
                     if isinstance(result_value, dict):
                         player_id = result_value.get("playerId") or result_value.get("id")
                         if player_id:
@@ -120,7 +117,11 @@ class IChancyAPI:
                     logger.info(f"Player ID found: {player_id}")
                     if player_id:
                         return True, "تم إنشاء الحساب بنجاح", player_id
-                    return True, "تم إنشاء الحساب ولكن لم يتم العثور على معرف اللاعب", None
+                    
+                    if result_value == "ex":
+                        return False, "اسم المستخدم موجود مسبقاً، يرجى اختيار اسم آخر", None
+                    
+                    return False, "تم إنشاء الحساب ولكن لم يتم العثور على معرف اللاعب", None
                 
                 error_msg = result.get("message") or result.get("error") or "فشل إنشاء الحساب"
                 logger.error(f"Register failed: {error_msg}")
