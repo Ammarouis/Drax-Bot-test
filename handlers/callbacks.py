@@ -5,6 +5,34 @@ from database.db import get_pending_request, update_pending_request, update_wall
 from utils.ichancy_api import get_api
 from handlers.common import is_admin
 
+async def myinfo_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    query = update.callback_query
+    data = query.data
+    
+    if data.startswith("myinfo_"):
+        user_id = int(data.split("_")[1])
+        if query.from_user.id != user_id:
+            await query.answer("غير مصرح لك", show_alert=True)
+            return
+        
+        user = await get_user(user_id)
+        if user:
+            password = user.get('ichancy_password', 'غير متوفر')
+            username = user.get('ichancy_username', 'غير متوفر')
+            player_id = user.get('ichancy_player_id', 'غير متوفر')
+            
+            await query.answer()
+            await query.message.reply_text(
+                f"📋 معلومات حسابك:\n\n"
+                f"🎮 اسم المستخدم: <code>{username}</code>\n"
+                f"🔑 كلمة المرور: <code>{password}</code>\n"
+                f"🆔 معرف اللاعب: <code>{player_id}</code>\n\n"
+                f"انقر على أي معلومة لنسخها!",
+                parse_mode="HTML"
+            )
+        else:
+            await query.answer("لم يتم العثور على معلومات", show_alert=True)
+
 async def approval_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     query = update.callback_query
     await query.answer()

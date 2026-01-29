@@ -23,9 +23,8 @@ async def create_account_start(update: Update, context: ContextTypes.DEFAULT_TYP
     user = await get_user(update.effective_user.id)
     if user and user.get('ichancy_player_id'):
         from telegram import InlineKeyboardMarkup, InlineKeyboardButton
-        password = user.get('ichancy_password', 'غير متوفر')
         keyboard = InlineKeyboardMarkup([
-            [InlineKeyboardButton(f"🔑 كلمة المرور: {password}", callback_data="show_password")]
+            [InlineKeyboardButton("🔑 عرض معلوماتي", callback_data=f"myinfo_{update.effective_user.id}")]
         ])
         await update.message.reply_text(
             f"✅ لديك حساب بالفعل!\n\n"

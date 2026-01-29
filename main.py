@@ -32,7 +32,7 @@ from handlers.admin import (
     admin_exchange_rate, admin_payment_codes, admin_payment_code_value,
     admin_create_gift_code, admin_gift_code_points, admin_gift_code_uses
 )
-from handlers.callbacks import approval_callback
+from handlers.callbacks import approval_callback, myinfo_callback
 from handlers.misc import show_history, show_terms, show_bonus_info, show_support, cancel_pending
 
 logging.basicConfig(
@@ -237,6 +237,7 @@ def main():
     application.add_handler(MessageHandler(filters.Regex("^💎 معلومات البونص الحالي$"), show_bonus_info))
     
     application.add_handler(CallbackQueryHandler(approval_callback, pattern="^(approve|reject)_"))
+    application.add_handler(CallbackQueryHandler(myinfo_callback, pattern="^myinfo_"))
     
     logger.info("Bot started successfully!")
     application.run_polling(allowed_updates=Update.ALL_TYPES)
