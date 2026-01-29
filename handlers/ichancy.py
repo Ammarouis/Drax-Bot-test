@@ -87,11 +87,12 @@ async def create_account_password(update: Update, context: ContextTypes.DEFAULT_
         )
         await update.message.reply_text(
             f"✅ تم إنشاء الحساب بنجاح!\n\n"
-            f"🎮 اسم المستخدم: {username}\n"
-            f"🔑 كلمة المرور: {password}\n"
-            f"🆔 معرف اللاعب: {player_id}\n\n"
+            f"🎮 اسم المستخدم: <code>{username}</code>\n"
+            f"🔑 كلمة المرور: <code>{password}</code>\n"
+            f"🆔 معرف اللاعب: <code>{player_id}</code>\n\n"
             f"احتفظ بهذه المعلومات!",
-            reply_markup=ichancy_menu_keyboard()
+            reply_markup=ichancy_menu_keyboard(),
+            parse_mode="HTML"
         )
     else:
         await update.message.reply_text(
@@ -278,18 +279,18 @@ async def show_my_info(update: Update, context: ContextTypes.DEFAULT_TYPE):
     
     info_text = (
         f"ℹ️ معلوماتك:\n\n"
-        f"🆔 معرف تيليجرام: {update.effective_user.id}\n"
+        f"🆔 معرف تيليجرام: <code>{update.effective_user.id}</code>\n"
         f"💰 رصيد المحفظة: {user['wallet_balance']:.2f} ل.س\n"
     )
     
     if user.get('ichancy_username'):
         info_text += f"\n🎮 حساب iChancy:\n"
-        info_text += f"   اسم المستخدم: {user['ichancy_username']}\n"
-        info_text += f"   معرف اللاعب: {user.get('ichancy_player_id', 'غير متوفر')}"
+        info_text += f"   اسم المستخدم: <code>{user['ichancy_username']}</code>\n"
+        info_text += f"   معرف اللاعب: <code>{user.get('ichancy_player_id', 'غير متوفر')}</code>"
     else:
         info_text += "\n⚠️ لم تقم بإنشاء حساب iChancy بعد"
     
-    await update.message.reply_text(info_text, reply_markup=ichancy_menu_keyboard())
+    await update.message.reply_text(info_text, reply_markup=ichancy_menu_keyboard(), parse_mode="HTML")
     return STATES["ICHANCY_MENU"]
 
 async def ichancy_back(update: Update, context: ContextTypes.DEFAULT_TYPE):

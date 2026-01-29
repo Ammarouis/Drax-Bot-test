@@ -39,10 +39,11 @@ async def wallet_deposit_syriatel(update: Update, context: ContextTypes.DEFAULT_
     
     await update.message.reply_text(
         f"📱 شحن عبر سيريتل كاش\n\n"
-        f"كود التحويل: {syriatel_code}\n"
+        f"كود التحويل: <code>{syriatel_code}</code>\n"
         f"الحد الأدنى: {min_amount} ل.س\n\n"
         f"أدخل المبلغ المحول:",
-        reply_markup=cancel_keyboard()
+        reply_markup=cancel_keyboard(),
+        parse_mode="HTML"
     )
     return STATES["WALLET_DEPOSIT_AMOUNT"]
 
@@ -55,10 +56,11 @@ async def wallet_deposit_shamcash_syp(update: Update, context: ContextTypes.DEFA
     
     await update.message.reply_text(
         f"💵 شحن عبر شام كاش - ليرة سورية\n\n"
-        f"كود التحويل: {shamcash_code}\n"
+        f"كود التحويل: <code>{shamcash_code}</code>\n"
         f"الحد الأدنى: {min_amount} ل.س\n\n"
         f"أدخل المبلغ المحول بالليرة:",
-        reply_markup=cancel_keyboard()
+        reply_markup=cancel_keyboard(),
+        parse_mode="HTML"
     )
     return STATES["WALLET_DEPOSIT_AMOUNT"]
 
@@ -73,11 +75,12 @@ async def wallet_deposit_shamcash_usd(update: Update, context: ContextTypes.DEFA
     
     await update.message.reply_text(
         f"💲 شحن عبر شام كاش - دولار\n\n"
-        f"كود التحويل: {shamcash_code}\n"
+        f"كود التحويل: <code>{shamcash_code}</code>\n"
         f"الحد الأدنى: {min_amount} $\n"
         f"سعر الصرف: {exchange_rate} ل.س/$\n\n"
         f"أدخل المبلغ المحول بالدولار:",
-        reply_markup=cancel_keyboard()
+        reply_markup=cancel_keyboard(),
+        parse_mode="HTML"
     )
     return STATES["WALLET_DEPOSIT_AMOUNT"]
 
