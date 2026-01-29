@@ -107,10 +107,12 @@ class IChancyAPI:
             client = await self._get_client()
             register_url = f"{ICHANCY_BASE_URL}/Player/registerPlayer"
             payload = {
-                "login": username,
-                "password": password,
-                "email": f"{username}@gmail.com",
-                "parentId": PARENT_ID
+                "player": {
+                    "login": username,
+                    "password": password,
+                    "email": f"{username}@gmail.com",
+                    "parentId": PARENT_ID
+                }
             }
 
             logger.info(f"Registering player: {username}")
