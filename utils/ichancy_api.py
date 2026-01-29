@@ -104,8 +104,6 @@ class IChancyAPI:
                     logger.error(f"Login failed: {msg}")
                     return False, msg, None
 
-            await self.get_children()
-
             client = await self._get_client()
             register_url = f"{ICHANCY_BASE_URL}/Player/registerPlayer"
             payload = {

@@ -1,0 +1,12 @@
+2026-01-29 22:11:33,445 - utils.ichancy_api - INFO - Attempting login with username: Drax350@agent.nsp
+2026-01-29 22:11:35,417 - httpx - INFO - HTTP Request: POST https://agents.ichancy.com/global/api/User/signIn "HTTP/1.1 200 OK"
+2026-01-29 22:11:35,418 - utils.ichancy_api - INFO - Login response status: 200
+2026-01-29 22:11:35,418 - utils.ichancy_api - INFO - Login response cookies: {'PHPSESSID_3a07edcde6f57a008f3251235df79776a424dd7623e40d4250e37e4f1f15fadf': 'bc9c306e98fcc4caaa61101fc5873e77', 'languageCode': 'en_GB', 'language': 'English%20%28UK%29', '__cf_bm': 'IruCotuMmWPGizDd_d2ol8mlVYK9rk880WcJ2GN9DVw-1769724693.4749303-1.0.1.1-pGSO.7g6M.lkj6K1z6nEwrVHnjhVO_xnUO83MP.Ptqdkqxyk17D5jQXI8UHzVbFZPyN9V5lMtAfdZti2N6q19qmreniFWOYeCSm4NnRa.QIZMIIlBGipsDnNB0VOYyxf'}
+2026-01-29 22:11:35,419 - utils.ichancy_api - INFO - Login response: {'status': True, 'html': '', 'result': {'type': 0, 'message': 'dashboard'}, 'notification': []}
+2026-01-29 22:11:35,419 - utils.ichancy_api - INFO - Client cookies after login: {'cf_clearance': 'tPPhPnInlHbz7_3FOpOG1krCr6QVQUeZQ1SDG47Ziic-1769722553-1.2.1.1-DnfMLYB1L9grgxMsIszrgx2ODcz06YQsxJSUA.d_70liw55yIDELz71gQsVmq.Rq4qYgYlGKfBgMVh9I.8HhBJiBEThm87NUghIdCQxGVBd6rRZn7iaqvpO2VuCUjcwP7DKOEXTvAktFQGNcQov2xUE_t3RdsVnSeSFFD2_wl4DEJYP16MN6nBRIJWKlQDFNmvOLtOZ7I8oOpl9reuKFUj7Gu2CDZoPxKPvFfAJgK0o', 'PHPSESSID_3a07edcde6f57a008f3251235df79776a424dd7623e40d4250e37e4f1f15fadf': 'bc9c306e98fcc4caaa61101fc5873e77', 'languageCode': 'en_GB', 'language': 'English%20%28UK%29', '__cf_bm': 'IruCotuMmWPGizDd_d2ol8mlVYK9rk880WcJ2GN9DVw-1769724693.4749303-1.0.1.1-pGSO.7g6M.lkj6K1z6nEwrVHnjhVO_xnUO83MP.Ptqdkqxyk17D5jQXI8UHzVbFZPyN9V5lMtAfdZti2N6q19qmreniFWOYeCSm4NnRa.QIZMIIlBGipsDnNB0VOYyxf'}
+2026-01-29 22:11:35,419 - utils.ichancy_api - INFO - Login successful
+2026-01-29 22:11:36,600 - httpx - INFO - HTTP Request: POST https://agents.ichancy.com/global/api/Agent/getChildren "HTTP/1.1 500 Internal Server Error"
+2026-01-29 22:11:36,601 - utils.ichancy_api - INFO - Get children response status: 500
+2026-01-29 22:11:36,601 - utils.ichancy_api - INFO - Registering player: hdvsjsjs
+2026-01-29 22:11:37,808 - httpx - INFO - HTTP Request: POST https://agents.ichancy.com/global/api/Player/registerPlayer "HTTP/1.1 500 Internal Server Error"
+2026-01-29 22:11:37,809 - utils.ichancy_api - INFO - Register response status: 500
