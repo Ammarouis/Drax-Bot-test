@@ -1,0 +1,102 @@
+Request URL
+https://agents.ichancy.com/global/api/User/signIn
+Request Method
+POST
+Status Code
+200 OK
+Remote Address
+185.162.229.2:443
+Referrer Policy
+strict-origin-when-cross-origin
+access-control-allow-credentials
+true
+access-control-allow-headers
+Content-Type
+access-control-allow-methods
+POST, OPTIONS
+access-control-allow-origin
+https://agents.ichancy.com
+cache-control
+max-age=600
+cf-cache-status
+DYNAMIC
+cf-ray
+9c5bf222a9f7ad9d-MRS
+content-encoding
+gzip
+content-type
+application/json
+date
+Thu, 29 Jan 2026 21:50:34 GMT
+expires
+Thu, 29 Jan 2026 22:00:34 GMT
+nel
+{"success_fraction":0,"report_to":"cf-nel","max_age":604800}
+pragma
+no-cache
+report-to
+{"endpoints":[{"url":"https:\/\/a.nel.cloudflare.com\/report\/v4?s=LzyXIc24lhb90fQlBar94zMKPViG50lCpEiRN09BiZXSpzQIkpMaYE%2BY%2BpMxEy03TMHv0BKBk5PNyDO1%2F9a6Mf2DcYaYcobiP9yZhKvRyApQsi1rvHdYISGAq5kVO2X7GsgCE00%3D"}],"group":"cf-nel","max_age":604800}
+server
+cloudflare
+server-timing
+cfL4;desc="?proto=TCP&rtt=98324&min_rtt=80267&rtt_var=15722&sent=138&recv=116&lost=0&retrans=1&sent_bytes=74175&recv_bytes=11403&delivery_rate=291282&cwnd=244&unsent_bytes=0&cid=df59eb61fcf549ab&ts=171569&x=0"
+set-cookie
+languageCode=ar_IQ; path=/
+set-cookie
+language=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/
+vary
+Accept-Encoding
+x-powered-by
+PHP/7.4.33
+:authority
+agents.ichancy.com
+:method
+POST
+:path
+/global/api/User/signIn
+:scheme
+https
+accept
+*/*
+accept-encoding
+gzip, deflate, br, zstd
+accept-language
+en-US,en;q=0.9,ar-EG;q=0.8,ar-MA;q=0.7,ar;q=0.6
+content-length
+55
+content-type
+application/json
+cookie
+_ga=GA1.1.1847981073.1768556803; _hjSessionUser_6458686=eyJpZCI6IjRlZTdiNjE3LTdjZjgtNWFlNi1iOWNhLTM4MTdjNmM4NDhlMCIsImNyZWF0ZWQiOjE3Njg1NTY4MTE0MDIsImV4aXN0aW5nIjp0cnVlfQ==; _ga_NYRZ35ZKZ0=GS2.1.s1768556802$o1$g1$t1768557180$j60$l0$h0; _ga_QBKS83LZ2E=GS2.1.s1768556809$o1$g1$t1768557651$j60$l0$h0; languageCode=ar_IQ; cf_clearance=tPPhPnInlHbz7_3FOpOG1krCr6QVQUeZQ1SDG47Ziic-1769722553-1.2.1.1-DnfMLYB1L9grgxMsIszrgx2ODcz06YQsxJSUA.d_70liw55yIDELz71gQsVmq.Rq4qYgYlGKfBgMVh9I.8HhBJiBEThm87NUghIdCQxGVBd6rRZn7iaqvpO2VuCUjcwP7DKOEXTvAktFQGNcQov2xUE_t3RdsVnSeSFFD2_wl4DEJYP16MN6nBRIJWKlQDFNmvOLtOZ7I8oOpl9reuKFUj7Gu2CDZoPxKPvFfAJgK0o; PHPSESSID_3a07edcde6f57a008f3251235df79776a424dd7623e40d4250e37e4f1f15fadf=279f81d608f5ce0690f76274ba4d5080; __cf_bm=iJ3I5aKVnyFiB21xAVX1UnNFNAeX_0DZOVXr0T9qmxQ-1769723422-1.0.1.1-FNJlv9GeXc1rZqmgFfsGnBIRqGHvbiWgxnaUiUEuDnKw8xHNgVRjfyvyAjUsD5RZhIaL3Z7Ei.iM5gOIYeWcwMSTF9vNw2D7zOqE1TJJBvo
+origin
+https://agents.ichancy.com
+priority
+u=1, i
+referer
+https://agents.ichancy.com/
+sec-ch-ua
+"Not(A:Brand";v="8", "Chromium";v="144", "Google Chrome";v="144"
+sec-ch-ua-arch
+"x86"
+sec-ch-ua-bitness
+"64"
+sec-ch-ua-full-version
+"144.0.7559.97"
+sec-ch-ua-full-version-list
+"Not(A:Brand";v="8.0.0.0", "Chromium";v="144.0.7559.97", "Google Chrome";v="144.0.7559.97"
+sec-ch-ua-mobile
+?0
+sec-ch-ua-model
+""
+sec-ch-ua-platform
+"Windows"
+sec-ch-ua-platform-version
+"19.0.0"
+sec-fetch-dest
+empty
+sec-fetch-mode
+cors
+sec-fetch-site
+same-origin
+user-agent
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36
