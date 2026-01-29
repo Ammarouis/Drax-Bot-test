@@ -12,11 +12,17 @@ async def init_db():
                 username TEXT,
                 ichancy_username TEXT,
                 ichancy_player_id TEXT,
+                ichancy_password TEXT,
                 wallet_balance REAL DEFAULT 0,
                 referrer_id INTEGER,
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             )
         ''')
+        
+        try:
+            await db.execute('ALTER TABLE users ADD COLUMN ichancy_password TEXT')
+        except:
+            pass
         
         await db.execute('''
             CREATE TABLE IF NOT EXISTS transactions (

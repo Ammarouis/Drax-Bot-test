@@ -22,12 +22,17 @@ async def ichancy_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def create_account_start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user = await get_user(update.effective_user.id)
     if user and user.get('ichancy_player_id'):
+        from telegram import InlineKeyboardMarkup, InlineKeyboardButton
+        password = user.get('ichancy_password', 'غير متوفر')
+        keyboard = InlineKeyboardMarkup([
+            [InlineKeyboardButton(f"🔑 كلمة المرور: {password}", callback_data="show_password")]
+        ])
         await update.message.reply_text(
             f"✅ لديك حساب بالفعل!\n\n"
             f"🎮 اسم المستخدم: <code>{user['ichancy_username']}</code>\n"
             f"🆔 معرف اللاعب: <code>{user['ichancy_player_id']}</code>\n\n"
             f"⚠️ لا يمكنك إنشاء أكثر من حساب واحد.",
-            reply_markup=ichancy_menu_keyboard(),
+            reply_markup=keyboard,
             parse_mode="HTML"
         )
         return STATES["ICHANCY_MENU"]
@@ -85,7 +90,8 @@ async def create_account_password(update: Update, context: ContextTypes.DEFAULT_
         await update_user(
             update.effective_user.id,
             ichancy_username=username,
-            ichancy_player_id=player_id
+            ichancy_player_id=player_id,
+            ichancy_password=password
         )
         await update.message.reply_text(
             f"✅ تم إنشاء الحساب بنجاح!\n\n"

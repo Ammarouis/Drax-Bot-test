@@ -90,7 +90,8 @@ async def approval_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif request_type == 'ichancy_deposit':
             player_id = request['details']
             api = get_api()
-            success, msg = await api.deposit_to_player(player_id, amount)
+            ichancy_amount = amount * 100
+            success, msg = await api.deposit_to_player(player_id, ichancy_amount)
             
             if success:
                 await query.edit_message_text(
@@ -120,7 +121,8 @@ async def approval_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         elif request_type == 'ichancy_withdraw':
             player_id = request['details']
             api = get_api()
-            success, msg = await api.withdraw_from_player(player_id, amount)
+            ichancy_amount = amount * 100
+            success, msg = await api.withdraw_from_player(player_id, ichancy_amount)
             
             if success:
                 await update_wallet(user_id, amount)
