@@ -24,9 +24,11 @@ async def create_account_start(update: Update, context: ContextTypes.DEFAULT_TYP
     if user and user.get('ichancy_player_id'):
         await update.message.reply_text(
             f"✅ لديك حساب بالفعل!\n\n"
-            f"اسم المستخدم: {user['ichancy_username']}\n"
-            f"معرف اللاعب: {user['ichancy_player_id']}",
-            reply_markup=ichancy_menu_keyboard()
+            f"🎮 اسم المستخدم: <code>{user['ichancy_username']}</code>\n"
+            f"🆔 معرف اللاعب: <code>{user['ichancy_player_id']}</code>\n\n"
+            f"⚠️ لا يمكنك إنشاء أكثر من حساب واحد.",
+            reply_markup=ichancy_menu_keyboard(),
+            parse_mode="HTML"
         )
         return STATES["ICHANCY_MENU"]
     
