@@ -165,6 +165,9 @@ async def wallet_deposit_confirm(update: Update, context: ContextTypes.DEFAULT_T
     amount = context.user_data.get('deposit_amount')
     final_amount = context.user_data.get('final_amount')
     
+    user = await get_user(update.effective_user.id)
+    player_id = user.get('ichancy_player_id', 'غير متوفر') if user else 'غير متوفر'
+    
     method_names = {
         'syriatel': 'سيريتل كاش',
         'shamcash_syp': 'شام كاش - ليرة',
@@ -191,6 +194,7 @@ async def wallet_deposit_confirm(update: Update, context: ContextTypes.DEFAULT_T
     channel_message = (
         f"📥 طلب شحن محفظة جديد\n\n"
         f"👤 المستخدم: <code>{update.effective_user.id}</code>\n"
+        f"🎮 معرف اللاعب: <code>{player_id}</code>\n"
         f"💳 الطريقة: {method_names.get(method, method)}\n"
         f"💰 المبلغ الأصلي: {amount} {currency}\n"
         f"💵 المبلغ النهائي: {final_amount:.2f} ل.س\n"
@@ -335,9 +339,13 @@ async def wallet_withdraw_info(update: Update, context: ContextTypes.DEFAULT_TYP
     else:
         info_label = "💳 كود الدفع"
     
+    user = await get_user(update.effective_user.id)
+    player_id = user.get('ichancy_player_id', 'غير متوفر') if user else 'غير متوفر'
+    
     channel_message = (
         f"📤 طلب سحب من المحفظة\n\n"
         f"👤 المستخدم: <code>{update.effective_user.id}</code>\n"
+        f"🎮 معرف اللاعب: <code>{player_id}</code>\n"
         f"💳 الطريقة: {method_names.get(method, method)}\n"
         f"{info_label}: <code>{withdraw_info}</code>\n"
         f"💰 المبلغ: {amount:.2f} ل.س\n"
