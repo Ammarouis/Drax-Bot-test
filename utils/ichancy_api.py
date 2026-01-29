@@ -71,11 +71,20 @@ class IChancyAPI:
             logger.exception(f"Login exception: {e}")
             return False, f"خطأ: {str(e)}"
 
+    def _get_headers(self):
+        return {
+            "Content-Type": "application/json",
+            "Accept": "*/*",
+            "Origin": "https://agents.ichancy.com",
+            "Referer": "https://agents.ichancy.com/",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+        }
+
     async def get_children(self):
         try:
             client = await self._get_client()
             url = f"{ICHANCY_BASE_URL}/Agent/getChildren"
-            response = await client.post(url, json={})
+            response = await client.post(url, json={}, headers=self._get_headers())
             logger.info(
                 f"Get children response status: {response.status_code}")
             if response.status_code == 200:
@@ -107,7 +116,7 @@ class IChancyAPI:
             }
 
             logger.info(f"Registering player: {username}")
-            response = await client.post(register_url, json=payload)
+            response = await client.post(register_url, json=payload, headers=self._get_headers())
             logger.info(f"Register response status: {response.status_code}")
 
             if response.status_code == 200:
@@ -154,7 +163,7 @@ class IChancyAPI:
                     "players": username
                 }
             }
-            response = await client.post(url, json=payload)
+            response = await client.post(url, json=payload, headers=self._get_headers())
             logger.info(
                 f"Get player ID response status: {response.status_code}")
             if response.status_code == 200:
@@ -196,7 +205,7 @@ class IChancyAPI:
                 "moneyStatus": 5
             }
 
-            response = await client.post(url, json=payload)
+            response = await client.post(url, json=payload, headers=self._get_headers())
             if response.status_code == 200:
                 result = response.json()
                 if result.get("success") or result.get("result"):
@@ -224,7 +233,7 @@ class IChancyAPI:
                 "moneyStatus": 5
             }
 
-            response = await client.post(url, json=payload)
+            response = await client.post(url, json=payload, headers=self._get_headers())
             if response.status_code == 200:
                 result = response.json()
                 if result.get("success") or result.get("result"):
