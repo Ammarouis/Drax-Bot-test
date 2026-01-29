@@ -88,20 +88,6 @@ async def verify_subscription(update: Update, context: ContextTypes.DEFAULT_TYPE
     return ConversationHandler.END
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    import asyncio
-    from telegram.constants import ChatAction
-    
-    await context.bot.send_chat_action(chat_id=update.effective_chat.id, action=ChatAction.TYPING)
-    await asyncio.sleep(0.5)
-    
-    loading_msg = await update.message.reply_text("⏳ جاري التحميل...")
-    await asyncio.sleep(0.3)
-    await loading_msg.edit_text("🔄 جاري التحميل...")
-    await asyncio.sleep(0.3)
-    await loading_msg.edit_text("✨ جاري التحميل...")
-    await asyncio.sleep(0.3)
-    await loading_msg.delete()
-    
     if not await check_subscription(update, context):
         await update.message.reply_text(
             f"👋 أهلاً بك في بوت 𝔻𝕣𝕒𝕩 𝕥𝕙𝕖 𝔻𝕖𝕤𝕥𝕣𝕠𝕪𝕖𝕣\n\n"
@@ -122,22 +108,11 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         )
         return ConversationHandler.END
     
-    welcome_text = (
-        "╔══════════════════════╗\n"
-        "   🎰 𝔻𝕣𝕒𝕩 𝕥𝕙𝕖 𝔻𝕖𝕤𝕥𝕣𝕠𝕪𝕖𝕣   \n"
-        "╚══════════════════════╝\n\n"
-        f"👋 مرحباً بك!\n\n"
-        f"💰 رصيد محفظتك: {user['wallet_balance']:.2f} ل.س\n\n"
-        "━━━━━━━━━━━━━━━━━━━━━━━━\n"
-        "📌 الأوامر المتاحة:\n"
-        "• /start - بدء البوت\n"
-        "• /admin - لوحة الأدمن\n"
-        "━━━━━━━━━━━━━━━━━━━━━━━━\n\n"
-        "⬇️ اختر من القائمة أدناه:"
-    )
-    
     await update.message.reply_text(
-        welcome_text,
+        f"🎰 مرحباً بك في بوت 𝔻𝕣𝕒𝕩 𝕥𝕙𝕖 𝔻𝕖𝕤𝕥𝕣𝕠𝕪𝕖𝕣\n\n"
+        f"💰 رصيد محفظتك: {user['wallet_balance']:.2f} ل.س\n\n"
+        f"📌 الأوامر: /start - /admin\n\n"
+        f"اختر من القائمة أدناه:",
         reply_markup=main_menu_keyboard()
     )
     return ConversationHandler.END
