@@ -81,7 +81,7 @@ drax-bot/
 
 **تم التصميم والبرمجة بواسطة**
 
-[![Developer](https://img.shields.io/badge/Developer-Ammar Satouf-purple?style=for-the-badge)](https://github.com/Ammar-Satouf)
+[![Developer](https://img.shields.io/badge/Developer-Ammar_Satouf-purple?style=for-the-badge)](https://github.com/Ammar-Satouf)
 
 </div>
 
