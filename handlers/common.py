@@ -109,7 +109,8 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return ConversationHandler.END
     
     await update.message.reply_text(
-        f"🎰 مرحباً بك في بوت 𝔻𝕣𝕒𝕩 𝕥𝕙𝕖 𝔻𝕖𝕤𝕥𝕣𝕠𝕪𝕖𝕣\n\n"
+        f"💫DRAX💫\n\n"
+        f"🦾أنا هنا لأسحق كل التعقيدات وأمنحك السيطرة الكاملة على أموالك بضغطة زر. لا انتظار.. لا تعقيد.. فقط سرعة \"تدميرية\"! ⚡🔻\n\n"
         f"💰 رصيد محفظتك: {user['wallet_balance']:.2f} ل.س\n\n"
         f"اختر من القائمة أدناه:",
         reply_markup=main_menu_keyboard()

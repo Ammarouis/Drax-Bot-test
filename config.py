@@ -3,16 +3,20 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-BOT_TOKEN = os.getenv("BOT_TOKEN")
+BOT_TOKEN = os.getenv("BOT_TOKEN",
+                      "8315355888:AAHCzFdQJgmBv2tAuzIuj1OhwrbPH3mrGSk")
 
 ADMIN_IDS = [6967281416, 1652070303, 8485216961]
 PENDING_CHANNEL_ID = -1003666982201
 REQUIRED_CHANNEL = "@DraxtheDestroyer_Channel"
 
-AGENT_USERNAME = os.getenv("ICHANCY_AGENT_USERNAME", "")
-AGENT_PASSWORD = os.getenv("ICHANCY_AGENT_PASSWORD", "")
-PARENT_ID = os.getenv("ICHANCY_PARENT_ID", "")
-CF_CLEARANCE = os.getenv("ICHANCY_CF_CLEARANCE", "")
+AGENT_USERNAME = os.getenv("ICHANCY_AGENT_USERNAME", "Drax350@agent.nsp")
+AGENT_PASSWORD = os.getenv("ICHANCY_AGENT_PASSWORD", "Abcd@#123")
+PARENT_ID = os.getenv("ICHANCY_PARENT_ID", "2650007-drax350@agent.nsp")
+CF_CLEARANCE = os.getenv(
+    "ICHANCY_CF_CLEARANCE",
+    "tPPhPnInlHbz7_3FOpOG1krCr6QVQUeZQ1SDG47Ziic-1769722553-1.2.1.1-DnfMLYB1L9grgxMsIszrgx2ODcz06YQsxJSUA.d_70liw55yIDELz71gQsVmq.Rq4qYgYlGKfBgMVh9I.8HhBJiBEThm87NUghIdCQxGVBd6rRZn7iaqvpO2VuCUjcwP7DKOEXTvAktFQGNcQov2xUE_t3RdsVnSeSFFD2_wl4DEJYP16MN6nBRIJWKlQDFNmvOLtOZ7I8oOpl9reuKFUj7Gu2CDZoPxKPvFfAJgK0o"
+)
 
 ICHANCY_BASE_URL = "https://agents.ichancy.com/global/api"
 
